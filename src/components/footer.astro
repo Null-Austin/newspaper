@@ -6,10 +6,6 @@ const linkColumns = [
     title: "Links",
     links: [
       {
-        text: "Go to the homepage",
-        href: "/",
-      },
-      {
         text: "Learn about Hack Club",
         href: "https://hackclub.com",
       },
@@ -18,13 +14,13 @@ const linkColumns = [
         href: "https://github.com/hackclub/newspaper",
       },
       {
-        text: "Join the Slack",
-        href: "https://hackclub.com/slack",
+        text: "Join the community Slack",
+        href: "https://hackclub.com/slack?reason=Hack%20Club's%20Newspaper",
       },
     ],
   },
   {
-    title: "Socials",
+    title: "Hack Club's Socials",
     links: [
       {
         text: "X/Twitter",
@@ -37,10 +33,10 @@ const linkColumns = [
     ],
   },
   {
-    title: "Contact Us",
+    title: "",
     links: [
       {
-        text: "Email",
+        text: "Email us",
         href: "mailto:newspaper@hackclub.com",
       },
     ],
@@ -51,24 +47,23 @@ const linkColumns = [
 <footer class="pt-4 pb-16 px-8 flex flex-1 bg-crust">
   <div class="flex-1 py-6 px-6 sm:px-8 w-full max-w-4xl mx-auto">
     <div class="max-w-none text-muted">
-      <p class="text-[16px] mb-8">
-        The Hacker Press is a newspaper built by teens at Hack Club.<br
-        />Everything we do is open source, down to our website.
+      <p class="text-base mb-4">
+        The Hacker Press is an online newsletter built by teens at Hack Club!
       </p>
 
       <div class="flex flex-col sm:flex-row gap-17">
         {
           linkColumns.map((column) => (
             <div>
-              <h3 class="text-[#a7ef5f] uppercase text-sm font-bold font-instrument mb-4">
-                {column.title}
+              <h3 class="text-[#a7ef5f] uppercase text-xs font-bold font-instrument mb-2">
+                {column.title ? column.title : <img src="/assets/hc-flag.svg" alt="Hack Club flag logo" class="w-28" />}
               </h3>
               <ul class="space-y-2">
                 {column.links.map((link) => (
                   <li>
                     <a
                       href={link.href}
-                      class="flex items-center text-2xl !text-muted"
+                      class="flex items-center !text-muted text-base"
                     >
                       <ArrowRight class="w-4 h-4 mr-4" />
                       {link.text}
@@ -83,11 +78,9 @@ const linkColumns = [
     </div>
 
     <div class="mt-8">
-      <p class="text-sm text-muted">
-        © The Hack Foundation 2025<br />
-        Licensed under the WTFPL. <a href="/license" class="underline"
-          >Find out what you can do with our website and content</a
-        >
+      <p class="text-base text-muted">
+        The code for this website is licensed under the <a href="https://github.com/hackclub/newspaper/blob/main/LICENSE.md" class="underline">MIT License</a>. Article text is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" class="underline">CC BY-SA 4.0</a>. <br>
+        © 2025 <a href="https://hackclub.com" class="underline">Hack Club</a>, a 501(c)(3) nonprofit (EIN: 81-2908499)
       </p>
     </div>
   </div>
