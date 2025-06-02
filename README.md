@@ -18,14 +18,16 @@ Get started by running the following:
 git clone https://github.com/hackclub/newspaper.git && cd newspaper
 ```
 
-Install dependencies (go make yourself some coffee/tea/run around while you wait lol)
+We use [Bun](https://bun.sh) for package management, so ensure that you have it installed.
+
+Install dependencies:
 
 ```bash
-npm install
+bun install
 ```
 
 Get this thing alive!!11! (runs on localhost:4321)
 
 ```bash
-npm run dev
+bun run dev
 ```
