@@ -109,6 +109,10 @@ For transform functions, this file is [a good reference](https://github.com/NotW
 
 Finally, **make sure you update this file** (`CONTRIBUTING.md`) to add the new property to the list of properties!
 
+## Changing the site domain
+
+To change the site domain, you need to update the `site` property in `astro.config.ts`. Then, update the sitemap URL in `public/robots.txt`.
+
 ## General tips
 
 - Place your assets in the `src/assets` folder, unless there's a good reason to put them somewhere else. (But nine times out of ten, you should put them in `src/assets`!)

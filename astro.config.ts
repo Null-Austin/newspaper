@@ -2,12 +2,14 @@ import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
-import node from "@astrojs/node";
-
 import vercel from "@astrojs/vercel";
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://news.hackclub.com",
+
   image: {
     remotePatterns: [
       // Notion's image CDN!
@@ -23,4 +25,5 @@ export default defineConfig({
   },
 
   adapter: vercel(),
+  integrations: [sitemap()],
 });

@@ -10,6 +10,7 @@
     "start": "bun run ./dist/server/entry.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.4.0",
     "@astrojs/vercel": "^8.1.4",
     "@fontsource/atkinson-hyperlegible": "^5.2.5",
     "@fontsource/instrument-sans": "^5.2.5",
