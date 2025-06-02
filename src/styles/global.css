@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-crust: #060e1f;
+  --color-accent: #a7ef5f;
+  --color-muted: #d6e3f7;
+
+  --font-instrument: "Instrument Sans", system-ui, sans-serif;
+  --font-heading: var(--font-instrument);
+  --font-sans: "Atkinson Hyperlegible", system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+}
+
+a {
+  color: var(--color-accent);
+}
+
+/* Styling for Tailwind Typography plugin */
+.prose {
+  color: #e0e0e0; /* Ensure prose text is also light */
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: var(--color-accent);
+}
+
+.prose a {
+  color: var(--color-accent);
+}
+
+.prose strong {
+  color: #e0e0e0;
+}
