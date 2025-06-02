@@ -1,5 +1,7 @@
 ---
 import ArrowRight from "@assets/arrow-right.svg";
+import HcFlag from "@assets/hc-flag.svg";
+import { Image } from "astro:assets";
 
 const linkColumns = [
   {
@@ -59,11 +61,7 @@ const linkColumns = [
                 {column.title ? (
                   column.title
                 ) : (
-                  <img
-                    src="/assets/hc-flag.svg"
-                    alt="Hack Club flag logo"
-                    class="w-28"
-                  />
+                  <Image src={HcFlag} alt="Hack Club flag logo" class="w-28" />
                 )}
               </h3>
               <ul class="space-y-2">
