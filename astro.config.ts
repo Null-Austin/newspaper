@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   image: {
     remotePatterns: [
+      // Notion's image CDN!
       {
         protocol: "https",
         hostname: "**.amazonaws.com",
