@@ -48,7 +48,7 @@ const linkColumns = [
   <div class="flex-1 py-6 px-6 sm:px-8 w-full max-w-4xl mx-auto">
     <div class="max-w-none text-muted">
       <p class="text-base mb-4">
-        The Hacker Press is an online newsletter built by teens at Hack Club!
+        The Hacker Press is an online newsletter built by teens at Hack Club.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-17">
@@ -56,7 +56,15 @@ const linkColumns = [
           linkColumns.map((column) => (
             <div>
               <h3 class="text-[#a7ef5f] uppercase text-xs font-bold font-instrument mb-2">
-                {column.title ? column.title : <img src="/assets/hc-flag.svg" alt="Hack Club flag logo" class="w-28" />}
+                {column.title ? (
+                  column.title
+                ) : (
+                  <img
+                    src="/assets/hc-flag.svg"
+                    alt="Hack Club flag logo"
+                    class="w-28"
+                  />
+                )}
               </h3>
               <ul class="space-y-2">
                 {column.links.map((link) => (
@@ -79,8 +87,19 @@ const linkColumns = [
 
     <div class="mt-8">
       <p class="text-base text-muted">
-        The code for this website is licensed under the <a href="https://github.com/hackclub/newspaper/blob/main/LICENSE.md" class="underline">MIT License</a>. Article text is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" class="underline">CC BY-SA 4.0</a>. <br>
-        © 2025 <a href="https://hackclub.com" class="underline">Hack Club</a>, a 501(c)(3) nonprofit (EIN: 81-2908499)
+        The code for this website is licensed under the <a
+          href="https://github.com/hackclub/newspaper/blob/main/LICENSE.md"
+          target="_blank"
+          class="underline">MIT License</a
+        >. Article text is licensed under <a
+          href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+          target="_blank"
+          class="underline">CC BY-SA 4.0</a
+        >. <br />
+        © {new Date().getFullYear()}
+        <a href="https://hackclub.com" class="underline" target="_blank"
+          >Hack Club</a
+        >, a 501(c)(3) nonprofit (EIN: 81-2908499)
       </p>
     </div>
   </div>
