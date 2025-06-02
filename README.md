@@ -8,26 +8,4 @@ This project is managed by [The Newspaper Team](https://hackclub.com/team), a Ha
 
 ## Contributing
 
-Yay! Thanks for contributing your jank :). This site is built off Astro.
-
-> **Fyi! ⚠️** This project is a work-in-progress (WIP), so don't contribute to anything yet as everything is subject to heavy change
-
-Get started by running the following:
-
-```bash
-git clone https://github.com/hackclub/newspaper.git && cd newspaper
-```
-
-We use [Bun](https://bun.sh) for package management, so ensure that you have it installed.
-
-Install dependencies:
-
-```bash
-bun install
-```
-
-Get this thing alive!!11! (runs on localhost:4321)
-
-```bash
-bun run dev
-```
+Please read `CONTRIBUTING.md`!
