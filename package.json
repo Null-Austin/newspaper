@@ -10,7 +10,7 @@
     "start": "bun run ./dist/server/entry.mjs"
   },
   "dependencies": {
-    "@astrojs/node": "^9.2.2",
+    "@astrojs/vercel": "^8.1.4",
     "@fontsource/atkinson-hyperlegible": "^5.2.5",
     "@fontsource/instrument-sans": "^5.2.5",
     "@tailwindcss/vite": "^4.1.8",
