@@ -1,11 +1,11 @@
 import { z } from "astro:content";
 import { defineCollection } from "astro:content";
-import { notionLoader } from "notion-astro-loader";
+import { notionLoader } from "@chlorinec-pkgs/notion-astro-loader";
 import {
   notionPageSchema,
   propertySchema,
   transformedPropertySchema,
-} from "notion-astro-loader/schemas";
+} from "@chlorinec-pkgs/notion-astro-loader/schemas";
 import { NOTION_TOKEN, NOTION_DATABASE_ID } from "astro:env/server";
 
 const defaultImageUrl = "https://placehold.co/600x500.png"; // when image missing somehow
@@ -24,6 +24,7 @@ const posts = defineCollection({
     properties: z.object({
       Name: transformedPropertySchema.title,
       Description: transformedPropertySchema.rich_text,
+      // TODO: is this correct? not sure
       Image: propertySchema.files.transform((files) => {
         const firstFile = files.files[0];
         if (!firstFile) return defaultImageUrl;
@@ -45,7 +46,9 @@ const posts = defineCollection({
           message: "Slug must be lowercase, alphanumeric, and kebab-case",
         }
       ),
-      //   Authors: transformedPropertySchema.people.optional(),
+      // FIXME: does not load more than one person's data
+      // also, zod schema for this is kind of cooked
+      Authors: propertySchema.people,
     }),
   }),
 });

@@ -17,6 +17,10 @@ export default defineConfig({
         protocol: "https",
         hostname: "**.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "**.googleusercontent.com",
+      },
     ],
   },
 
@@ -35,6 +39,16 @@ export default defineConfig({
         access: "secret",
       }),
       LOOPS_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      LOOPS_COOKIE: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      LOOPS_LIST_ID: envField.string({
         context: "server",
         access: "secret",
         optional: true,

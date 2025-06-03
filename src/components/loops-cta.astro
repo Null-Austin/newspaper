@@ -1,5 +1,6 @@
 ---
 import { LOOPS_TOKEN } from "astro:env/server";
+import LoopsAudienceCount from "./loops-audience-count.astro";
 ---
 
 <div class={`w-full bg-crust text-crust-text rounded-lg shadow-xs`}>
@@ -26,11 +27,11 @@ import { LOOPS_TOKEN } from "astro:env/server";
       </button>
     </div>
     <p class="text-sm text-muted mt-3">
-      {
-        LOOPS_TOKEN
-          ? "We'll send you a weekly email with the latest posts and events."
-          : "Loops has not been set up. Please set it up in the .env file."
-      }
+      Join <b
+        ><LoopsAudienceCount server:defer>
+          <span slot="fallback">0</span>
+        </LoopsAudienceCount></b
+      > other subscribers reading <i>The Hacker Press</i>
     </p>
   </div>
 </div>
