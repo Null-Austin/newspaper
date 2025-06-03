@@ -37,6 +37,65 @@ async function getAudienceCount() {
   }
 }
 const audienceCount = await getAudienceCount();
+const counterElId = Math.random().toString();
 ---
 
-<span>{withCommas(audienceCount)}</span>
+<loops-audience-count data-counterid={counterElId} data-count={audienceCount}>
+  <span id={counterElId}>{audienceCount}</span>
+</loops-audience-count>
+
+<script>
+  import { CountUp } from "countup.js";
+
+  class LoopsAudienceCount extends HTMLElement {
+    private countUp: any;
+    private hasStarted: boolean = false;
+    private observer: IntersectionObserver | null = null;
+    private counterEl: HTMLElement | null = null;
+
+    connectedCallback() {
+      const counterId = this.dataset.counterid!;
+      const count = Number(this.dataset.count!);
+      this.counterEl = document.getElementById(counterId)!;
+      this.countUp = new CountUp(this.counterEl, count);
+      this.setupScrollTrigger();
+    }
+
+    private setupScrollTrigger() {
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !this.hasStarted) {
+              this.startCounting();
+            }
+          });
+        },
+        {
+          threshold: 0.5, //  50% visible
+          rootMargin: "0px 0px -50px 0px", // trigger countup slightly before fully in view
+        }
+      );
+
+      this.observer.observe(this);
+    }
+
+    private startCounting() {
+      this.hasStarted = true;
+      this.counterEl!.textContent = "0";
+      this.countUp.start();
+
+      if (this.observer) {
+        this.observer.disconnect();
+        this.observer = null;
+      }
+    }
+
+    disconnectedCallback() {
+      if (this.observer) {
+        this.observer.disconnect();
+      }
+    }
+  }
+
+  customElements.define("loops-audience-count", LoopsAudienceCount);
+</script>

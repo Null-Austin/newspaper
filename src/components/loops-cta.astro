@@ -27,9 +27,11 @@ import LoopsAudienceCount from "./loops-audience-count.astro";
       </button>
     </div>
     <p class="text-sm text-muted mt-3">
-      Join <b><LoopsAudienceCount server:defer /></b> other subscribers reading <i
-        >The Hacker Press</i
-      >
+      Join <b
+        ><LoopsAudienceCount server:defer>
+          <span slot="fallback">0</span>
+        </LoopsAudienceCount></b
+      > other subscribers reading <i>The Hacker Press</i>
     </p>
   </div>
 </div>
