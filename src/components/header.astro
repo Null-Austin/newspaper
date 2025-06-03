@@ -6,7 +6,7 @@ import HcFlagTop from "@assets/hc-flag-top.svg";
 <header class="bg-mantle w-full px-4 sm:px-6 fixed top-0 z-50 shadow-xs">
   <nav class="max-w-7xl mx-auto flex justify-between items-center">
     <!-- Logo -->
-    <div class="flex items-center">
+    <div class="flex items-center gap-4">
       <a href="/" class="flex items-center space-x-2">
         <Image
           src={HcFlagTop}
@@ -15,6 +15,13 @@ import HcFlagTop from "@assets/hc-flag-top.svg";
           alt="The Hacker Press Logo"
         />
       </a>
+      {
+        import.meta.env.DEV && (
+          <span class="bg-orange-400 text-crust font-extrabold px-3 py-1 rounded-full text-lg font-mono">
+            DEV
+          </span>
+        )
+      }
     </div>
 
     <!-- Desktop Navigation -->
