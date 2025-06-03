@@ -14,9 +14,15 @@ import Footer from "@components/footer.astro";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
+    <title>The Hacker Press</title>
+
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <title>Astro Basics</title>
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="The Hacker Press"
+      href={new URL("rss.xml", Astro.site)}
+    />
     <SpeedInsights />
     <Analytics />
   </head>
