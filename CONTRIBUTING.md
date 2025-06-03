@@ -30,7 +30,7 @@ Hang on to this database ID, we'll need it later.
 
 ### Setting up the Notion integration
 
->![IMPORTANT]
+> [!WARNING]
 >
 > You need to be an admin of the Notion workspace to set up the integration.
 
