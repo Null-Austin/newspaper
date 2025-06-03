@@ -1,0 +1,36 @@
+---
+import { LOOPS_TOKEN } from "astro:env/server";
+---
+
+<div class={`w-full bg-crust text-crust-text rounded-lg shadow-xs`}>
+  <div class="py-12 px-8 flex flex-col text-center items-center justify-center">
+    <h2 class="text-4xl font-bold mb-3">Want to read more posts like this?</h2>
+    <p class="text-lg mb-6">
+      Subscribe to The Hacker National to be notified of cool projects,
+      hackathons, and events.<br />No spam. Unsubscribe anytime.
+    </p>
+    <div
+      class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full"
+    >
+      <input
+        type="email"
+        placeholder="Email"
+        class="w-full max-w-sm p-2 rounded-md border border-input"
+        disabled={!LOOPS_TOKEN}
+      />
+      <button
+        class="bg-accent w-full sm:w-fit cursor-pointer text-crust px-4 py-2 rounded-md"
+        disabled={!LOOPS_TOKEN}
+      >
+        Subscribe
+      </button>
+    </div>
+    <p class="text-sm text-muted mt-3">
+      {
+        LOOPS_TOKEN
+          ? "We'll send you a weekly email with the latest posts and events."
+          : "Loops has not been set up. Please set it up in the .env file."
+      }
+    </p>
+  </div>
+</div>

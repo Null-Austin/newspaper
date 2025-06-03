@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/layout.astro";
+import LoopsCta from "@components/loops-cta.astro";
 import type { CollectionEntry } from "astro:content";
 interface Props {
   post: CollectionEntry<"posts">;
@@ -14,7 +15,7 @@ const { post } = Astro.props;
       <div class="flex flex-1">
         <article class="w-full mx-auto">
           <div
-            class="w-full py-8 mx-auto bg-crust text-white p-6 sm:p-8 overflow-y-auto"
+            class="w-full py-8 mx-auto bg-crust text-crust-text p-6 sm:p-8 overflow-y-auto"
           >
             <h1
               class="text-4xl sm:text-5xl/[130%] font-bold text-accent mb-6 w-full max-w-4xl mx-auto"
@@ -31,9 +32,12 @@ const { post } = Astro.props;
 
           <main class="flex-1 p-6 sm:p-8 overflow-y-auto max-w-4xl mx-auto">
             <div
-              class="prose prose-invert max-w-none lg:prose-lg text-text mb-32"
+              class="prose prose-invert max-w-none lg:prose-lg text-text mb-16"
             >
               <slot />
+            </div>
+            <div class="mb-32">
+              <LoopsCta />
             </div>
           </main>
         </article>

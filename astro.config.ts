@@ -34,6 +34,11 @@ export default defineConfig({
         context: "server",
         access: "secret",
       }),
+      LOOPS_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
     },
   },
 
