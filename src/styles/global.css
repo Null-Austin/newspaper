@@ -47,6 +47,7 @@
   --font-heading: var(--font-instrument);
   --font-sans: "Atkinson Hyperlegible", system-ui, sans-serif;
   --font-phantom: "Phantom Sans", system-ui, sans-serif;
+  --font-fairplay: "Playfair Display", system-ui, sans-serif;
 }
 
 body {
