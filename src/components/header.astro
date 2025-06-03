@@ -1,0 +1,187 @@
+---
+import { Image } from "astro:assets";
+import HcFlagTop from "@assets/hc-flag-top.svg";
+---
+
+<header class="bg-mantle w-full px-4 sm:px-6 fixed top-0 z-50 shadow-xs">
+  <nav class="max-w-7xl mx-auto flex justify-between items-center">
+    <!-- Logo -->
+    <div class="flex items-center">
+      <a href="/" class="flex items-center space-x-2">
+        <Image src={HcFlagTop} class="w-28" alt="The Hacker Press Logo" />
+      </a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center space-x-8 text-xl">
+      <a
+        href="/"
+        class="text-text hover:text-accent transition-colors duration-200"
+      >
+        Home
+      </a>
+      <a
+        href="/archives"
+        class="text-text hover:text-accent transition-colors duration-200"
+      >
+        The Archives
+      </a>
+      <a
+        href="/roundup"
+        class="text-text hover:text-accent transition-colors duration-200"
+      >
+        Weekly Roundup
+      </a>
+      <a
+        href="/newsletter"
+        class="text-text hover:text-accent transition-colors duration-200"
+      >
+        Newsletter
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-button"
+      class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
+      aria-label="Toggle mobile menu"
+    >
+      <span
+        class="block w-6 h-0.5 bg-text transition-all duration-300 ease-in-out"
+      ></span>
+      <span
+        class="block w-6 h-0.5 bg-text transition-all duration-300 ease-in-out"
+      ></span>
+      <span
+        class="block w-6 h-0.5 bg-text transition-all duration-300 ease-in-out"
+      ></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Navigation Menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden absolute top-full left-0 w-full bg-mantle border-t border-surface0 shadow-lg transform -translate-y-full opacity-0 transition-all duration-300 ease-in-out pointer-events-none"
+  >
+    <div class="px-4 py-6 space-y-4">
+      <a
+        href="/"
+        class="block text-text hover:text-accent transition-colors duration-200 py-2 text-lg"
+      >
+        Home
+      </a>
+      <a
+        href="/archives"
+        class="block text-text hover:text-accent transition-colors duration-200 py-2 text-lg"
+      >
+        The Archives
+      </a>
+      <a
+        href="/roundup"
+        class="block text-text hover:text-accent transition-colors duration-200 py-2 text-lg"
+      >
+        Weekly Roundup
+      </a>
+      <a
+        href="/newsletter"
+        class="block text-text hover:text-accent transition-colors duration-200 py-2 text-lg"
+      >
+        Newsletter
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu functionality
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuLines = mobileMenuButton?.querySelectorAll("span");
+
+  let isMenuOpen = false;
+
+  mobileMenuButton?.addEventListener("click", () => {
+    isMenuOpen = !isMenuOpen;
+
+    if (isMenuOpen) {
+      // Open menu
+      mobileMenu?.classList.remove(
+        "-translate-y-full",
+        "opacity-0",
+        "pointer-events-none"
+      );
+      mobileMenu?.classList.add(
+        "translate-y-0",
+        "opacity-100",
+        "pointer-events-auto"
+      );
+
+      // Animate hamburger to X
+      if (menuLines) {
+        menuLines[0].style.transform = "rotate(45deg) translate(6px, 6px)";
+        menuLines[1].style.opacity = "0";
+        menuLines[2].style.transform = "rotate(-45deg) translate(6px, -6px)";
+      }
+    } else {
+      // Close menu
+      mobileMenu?.classList.add(
+        "-translate-y-full",
+        "opacity-0",
+        "pointer-events-none"
+      );
+      mobileMenu?.classList.remove(
+        "translate-y-0",
+        "opacity-100",
+        "pointer-events-auto"
+      );
+
+      // Animate X back to hamburger
+      if (menuLines) {
+        menuLines[0].style.transform = "none";
+        menuLines[1].style.opacity = "1";
+        menuLines[2].style.transform = "none";
+      }
+    }
+  });
+
+  // Close menu when clicking on a link
+  const mobileMenuLinks = mobileMenu?.querySelectorAll("a");
+  mobileMenuLinks?.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (isMenuOpen) {
+        mobileMenuButton?.click();
+      }
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (
+      isMenuOpen &&
+      !mobileMenuButton?.contains(target) &&
+      !mobileMenu?.contains(target)
+    ) {
+      mobileMenuButton?.click();
+    }
+  });
+</script>
+
+<style>
+  /* Ensure smooth transitions */
+  #mobile-menu {
+    will-change: transform, opacity;
+  }
+
+  #mobile-menu-button span {
+    will-change: transform, opacity;
+  }
+
+  /* Add backdrop blur effect for better readability */
+  @supports (backdrop-filter: blur(10px)) {
+    header {
+      backdrop-filter: blur(10px);
+      background-color: rgba(var(--mantle), 0.95);
+    }
+  }
+</style>

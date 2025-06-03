@@ -2,9 +2,12 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-crust: #060e1f;
+  --color-crust: #0f0000;
   --color-accent: #a7ef5f;
-  --color-muted: #d6e3f7;
+  --color-muted: #ffc9c9;
+  --color-background: #fdf2f2;
+  --color-heading: #3f1717;
+  --color-text: #3f1717;
 
   --font-instrument: "Instrument Sans", system-ui, sans-serif;
   --font-heading: var(--font-instrument);
@@ -13,6 +16,16 @@
 
 body {
   font-family: var(--font-sans);
+  background-color: var(--color-background);
+}
+
+.prose {
+  font-size: 20px;
+  color: var(--color-text);
+}
+
+.prose a {
+  color: var(--color-accent);
 }
 
 h1,
@@ -21,17 +34,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--color-accent);
   font-family: var(--font-heading);
-}
-
-a {
-  color: var(--color-accent);
-}
-
-/* Styling for Tailwind Typography plugin */
-.prose {
-  color: #e0e0e0; /* Ensure prose text is also light */
 }
 
 .prose h1,
@@ -40,13 +43,5 @@ a {
 .prose h4,
 .prose h5,
 .prose h6 {
-  color: var(--color-accent);
-}
-
-.prose a {
-  color: var(--color-accent);
-}
-
-.prose strong {
-  color: #e0e0e0;
+  color: var(--color-heading);
 }
