@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -22,6 +22,19 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  env: {
+    schema: {
+      NOTION_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      NOTION_DATABASE_ID: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+    },
   },
 
   adapter: vercel(),

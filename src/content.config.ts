@@ -5,11 +5,12 @@ import {
   notionPageSchema,
   transformedPropertySchema,
 } from "notion-astro-loader/schemas";
+import { NOTION_TOKEN, NOTION_DATABASE_ID } from "astro:env/server";
 
 const posts = defineCollection({
   loader: notionLoader({
-    auth: import.meta.env.NOTION_TOKEN,
-    database_id: import.meta.env.NOTION_DATABASE_ID,
+    auth: NOTION_TOKEN,
+    database_id: NOTION_DATABASE_ID,
     filter: {
       property: "Published",
       checkbox: { equals: true },
