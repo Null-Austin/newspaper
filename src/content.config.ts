@@ -3,9 +3,12 @@ import { defineCollection } from "astro:content";
 import { notionLoader } from "notion-astro-loader";
 import {
   notionPageSchema,
+  propertySchema,
   transformedPropertySchema,
 } from "notion-astro-loader/schemas";
 import { NOTION_TOKEN, NOTION_DATABASE_ID } from "astro:env/server";
+
+const defaultImageUrl = "https://placehold.co/600x500.png"; // when image missing somehow
 
 const posts = defineCollection({
   loader: notionLoader({
@@ -21,7 +24,16 @@ const posts = defineCollection({
     properties: z.object({
       Name: transformedPropertySchema.title,
       Description: transformedPropertySchema.rich_text,
-      Image: transformedPropertySchema.rich_text,
+      Image: propertySchema.files.transform((files) => {
+        const firstFile = files.files[0];
+        if (!firstFile) return defaultImageUrl;
+        if (firstFile.type === "file") {
+          return firstFile.file.url;
+        } else if (firstFile.type === "external") {
+          return firstFile.external.url;
+        }
+        return defaultImageUrl;
+      }),
       ImageAlt: transformedPropertySchema.rich_text,
       Date: transformedPropertySchema.date.transform((property) => {
         return property?.start;
