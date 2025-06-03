@@ -1,6 +1,9 @@
 import { z } from "astro:content";
 import { defineCollection } from "astro:content";
-import { notionLoader } from "@chlorinec-pkgs/notion-astro-loader";
+import {
+  notionLoader,
+  fileToImageAsset,
+} from "@chlorinec-pkgs/notion-astro-loader";
 import {
   notionPageSchema,
   propertySchema,
@@ -25,15 +28,9 @@ const posts = defineCollection({
       Name: transformedPropertySchema.title,
       Description: transformedPropertySchema.rich_text,
       // TODO: is this correct? not sure
-      Image: propertySchema.files.transform((files) => {
+      Image: propertySchema.files.transform(async (files) => {
         const firstFile = files.files[0];
-        if (!firstFile) return defaultImageUrl;
-        if (firstFile.type === "file") {
-          return firstFile.file.url;
-        } else if (firstFile.type === "external") {
-          return firstFile.external.url;
-        }
-        return defaultImageUrl;
+        return (await fileToImageAsset(firstFile))?.src;
       }),
       ImageAlt: transformedPropertySchema.rich_text,
       Date: transformedPropertySchema.date.transform((property) => {
