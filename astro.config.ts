@@ -39,6 +39,16 @@ export default defineConfig({
         access: "secret",
         optional: true,
       }),
+      LOOPS_COOKIE: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      LOOPS_LIST_ID: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
     },
   },
 
