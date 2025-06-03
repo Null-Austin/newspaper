@@ -2,16 +2,41 @@
 import Layout from "@layouts/layout.astro";
 import { getCollection } from "astro:content";
 const posts = await getCollection("posts");
+
+// debugging be like
+posts.forEach(post => {
+  console.log(post.data);
+});
+
+function formatFullDate(date: Date) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const parts = new Intl.DateTimeFormat('en-US', options).formatToParts(date);
+
+  let day = parts.find(p => p.type === 'day').value;
+  
+  const month = parts.find(p => p.type === 'month').value;
+  const year = parts.find(p => p.type === 'year').value;
+
+  return `${month} ${day}, ${year}`;
+}
 ---
 
 <Layout>
-  <pre>
-    {posts.map((post) => (
-      <li>
-		{JSON.stringify(post, null, 2)}
-        {post.data.properties.Name}
-        {post.data.properties.Name}
-      </li>
+  <grid class="grid grid-cols-3 gap-10 my-4 mx-20"> 
+    {posts.map((post) => ( /* {post.data.properties.Name} */
+      <div class="flex flex-col">
+        <img src={post.data.properties.Image} alt={post.data.properties.ImageAlt} class="w-full h-64 object-cover mb-2 rounded-lg" />
+        <a 
+          href={`/posts/${post.data.properties.Slug}`} 
+          class="text-xl transition-colors !text-black"
+        >
+          {post.data.properties.Name}
+        </a>
+        <div class="flex flex-col mt-2">
+          <p class='font-extralight font-phantom text-[#717171]'>{formatFullDate(post.data.properties.Date)}</p>
+          <p class='font-bold font-phantom text-[#6A6A6A]'>Zach Latta, Orpheus, Heidi</p>
+        </div>
+      </div>
     ))}
-  </pre>
+  </grid>
 </Layout>
