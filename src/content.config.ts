@@ -21,6 +21,8 @@ const posts = defineCollection({
     properties: z.object({
       Name: transformedPropertySchema.title,
       Description: transformedPropertySchema.rich_text,
+      Image: transformedPropertySchema.rich_text,
+      ImageAlt: transformedPropertySchema.rich_text,
       Date: transformedPropertySchema.date.transform((property) => {
         return property?.start;
       }),
