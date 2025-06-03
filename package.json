@@ -20,7 +20,8 @@
     "@vercel/speed-insights": "^1.2.0",
     "astro": "^5.8.0",
     "notion-astro-loader": "^0.4.0",
-    "tailwindcss": "^4.1.8"
+    "tailwindcss": "^4.1.8",
+    "vercel": "^42.3.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
