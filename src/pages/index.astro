@@ -12,7 +12,7 @@ const posts = await getCollection("posts");
     <h1 class="text-4xl mb-5">The Hacker Press</h1>
     <p class="">Hack Club's official newspaper/blog. Find articles here about the Slack, Hack Club's events, and more :D.</p>
   </header>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 my-4 mx-4 md:mx-20">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-4 mx-4 md:mx-20">
     {
       posts.map((post) => (
         <div class="flex flex-col">
