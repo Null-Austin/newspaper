@@ -37,6 +37,7 @@
   --color-crust: #0f0000;
   --color-crust-text: #ffffff;
   --color-accent: #a7ef5f;
+  --color-accent-orange: #faaa40;
   --color-black-accent: #354152;
   --color-muted: #ffc9c9;
   --color-background: #fdf2f2;
@@ -81,4 +82,10 @@ h6 {
 .prose h5,
 .prose h6 {
   color: var(--color-heading);
+}
+
+/* tailwind doesn't have this attribute lol */
+/* what better than to jank-ily make our own? */
+.writing-lr {
+  writing-mode: sideways-lr;
 }
