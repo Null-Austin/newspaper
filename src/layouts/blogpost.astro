@@ -1,34 +1,53 @@
 ---
 import Layout from "@layouts/layout.astro";
 import LoopsCta from "@components/loops-cta.astro";
+import { formatDate } from "@util";
 import type { CollectionEntry } from "astro:content";
 interface Props {
   post: CollectionEntry<"posts">;
 }
 
 const { post } = Astro.props;
+console.log(post.data.properties.Authors);
 ---
 
 <Layout>
   <div class="flex flex-col min-h-screen text-text">
-    <div class="flex min-h-screen mt-16">
+    <div class="flex min-h-screen">
       <div class="flex flex-1">
         <article class="w-full mx-auto">
-          <div
-            class="w-full py-8 mx-auto bg-crust text-crust-text p-6 sm:p-8 overflow-y-auto"
+          <header
+            class="w-full py-8 px-30 pt-20 bg-accent-header text-white pb-6 sm:pb-8 overflow-y-auto"
           >
             <h1
-              class="text-4xl sm:text-5xl/[130%] font-bold text-accent mb-6 w-full max-w-4xl mx-auto"
+              class="text-4xl sm:text-5xl/[130%] font-bold mb-6 w-full max-w-4xl"
             >
               {post.data.properties.Name}
             </h1>
-
-            <section class="mb-8 w-full max-w-4xl mx-auto">
-              <p class="text-lg sm:text-2xl">
-                {post.data.properties.Description}
-              </p>
-            </section>
-          </div>
+            <div class="flex flex-row gap-10">
+                <img
+                src={post.data.properties.Image}
+                alt={post.data.properties.ImageAlt}
+                class="w-[50vw] max-w-full h-[45vh] max-h-full"
+              />
+              <div>
+                <p class="text-lg sm:text-2xl mb-5">{post.data.properties.Description}</p>
+                <p class="text-gray-400">
+                    Written by {post.data.properties.Authors.people.map((author, index) => {
+                      const name = author.name;
+                      const isLast = index === post.data.properties.Authors.people.length - 1;
+                      return (
+                        <span>{name}{!isLast && ", "}</span>
+                      );
+                    })
+                  }
+                </p>
+                <p class="text-gray-400">
+                  {formatDate(post.data.properties.Date)}
+                </p>
+              </div>
+            </div>
+          </header>
 
           <main class="flex-1 p-6 sm:p-8 overflow-y-auto max-w-4xl mx-auto">
             <div
