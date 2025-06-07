@@ -12,6 +12,17 @@ const posts = await getCollection("posts");
     <h1 class="text-4xl mb-5">The Hacker Press</h1>
     <p class="">Hack Club's official newspaper/blog. Find articles here about the Slack, Hack Club's events, and more :D.</p>
   </header>
+  <div class="flex flex-row gap-5 bg-accent-header text-white px-4 md:px-20 py-4">
+    <img
+        src="https://placehold.co/700x500.png"
+        alt="Featured Article"
+        class="w-64 object-cover rounded-lg"
+      />
+    <div class="">
+      <h3 class="text-4xl">#meta to complain about Zach Latta ‘breathing incorrectly’</h3>
+      <p>In other news, water is wet</p>
+    </div>
+  </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-4 mx-4 md:mx-20">
     {
       posts.map((post) => (
@@ -21,13 +32,13 @@ const posts = await getCollection("posts");
             alt={post.data.properties.ImageAlt}
             class="w-full h-64 object-cover mb-2 rounded-lg"
           />
-          <a
+          <h3><a
             href={`/posts/${post.data.properties.Slug}`}
             class="text-xl transition-colors text-text"
             aria-label="Read '{post.data.properties.Name}' article"
           >
             {post.data.properties.Name}
-          </a>
+          </a></h3>
           <div class="flex flex-col mt-2">
             <p class="font-extralight font-phantom text-[#717171]">
               {formatDate(post.data.properties.Date)}
