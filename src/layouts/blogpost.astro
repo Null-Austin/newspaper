@@ -3,6 +3,7 @@ import Layout from "@layouts/layout.astro";
 import LoopsCta from "@components/loops-cta.astro";
 import { formatDate } from "@util";
 import type { CollectionEntry } from "astro:content";
+import writersMetadata from "../data/writers.json";
 interface Props {
   post: CollectionEntry<"posts">;
 }
@@ -24,7 +25,7 @@ console.log(post.data.properties.Authors);
             >
               {post.data.properties.Name}
             </h1>
-            <div class="flex flex-row gap-10">
+            <div class="flex flex-col xl:flex-row gap-10">
                 <img
                 src={post.data.properties.Image}
                 alt={post.data.properties.ImageAlt}
@@ -42,21 +43,44 @@ console.log(post.data.properties.Authors);
                     })
                   }
                 </p>
-                <p class="text-gray-400">
+                <p class="text-gray-400 mb-5">
                   {formatDate(post.data.properties.Date)}
                 </p>
+                <div class="inline-flex flex-row-reverse">
+                  {post.data.properties.Authors.people.map((author, index) => {
+                    console.log(author)
+                    return (
+                      <div class="flex items-start gap-3">
+                        <span class="flex rounded-full overflow-hidden justify-center w-8 shrink-0">
+                          <img src={author.avatar_url as string} alt={author.name as string} class="object-cover w-8" />
+                        </span>
+                        <p class="text-gray-400">{writersMetadata[author.id as keyof typeof writersMetadata]?.description}</p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </header>
-
-          <main class="flex-1 p-6 sm:p-8 overflow-y-auto max-w-4xl mx-auto">
-            <div
-              class="prose prose-invert max-w-none lg:prose-lg text-text mb-16"
-            >
-              <slot />
-            </div>
-            <div class="mb-32">
-              <LoopsCta />
+          <main class="flex-1 p-6 sm:p-8 overflow-y-auto max-w-7/10 mx-auto">
+            <div class="xl:grid xl:grid-cols-[1fr_300px]">
+              <div class="prose prose-invert max-w-none lg:prose-lg text-text mb-16 grow"><slot /></div>
+              <aside class="bg-accent-header text-text-accent p-6 xl:ml-6 h-fit">
+                <h2 class="text-3xl xl:text-xl mb-4">We write an email newsletter too!</h2>
+                <p class="mb-8">Subscribe to The Hacker Press to be notified of cool projects, hackathons, and events at Hack Club. Unsubscribe anytime.</p>
+                <label for="signup-email">
+                  Your email
+                  <input
+                  type="email"
+                  placeholder="orpheus@hackclub.com"
+                  id="signup-email"
+                  class="basis-2/3 flex-[2] w-full p-2 mb-4 bg-[#404859]"
+                />
+                </label>
+                <button class="bg-orange-400 w-full sm:w-fit cursor-pointer text-crust px-4 py-2 rounded-full">
+                  Sign up
+                </button>
+              </aside>
             </div>
           </main>
         </article>

@@ -1,0 +1,33 @@
+{
+    "THE FOLLOWING IS WIP TEXT": "WILL BE SUBJECT TO CHANGE :3 offbrand json comment lol",
+    "test": {
+        "description": "John Doe works at Hack Club HQ as a Gap Year. John makes YSWS based on hardware and also runs [Rocket Hardware Parade](rocket.example.com), this year's summer flagship.",
+        "profile": null,
+        "user_id": "ABC123XYZ",
+        "team": false
+    },
+    "f1bbf5e8-31ef-4d30-ac6b-3dcb64fccc77": {
+        "description": "Mahad is a volunteer writer at the Newspaper Team. He also builds infra for the team. He enjoys using aga emojis and thinks everyone should use them.",
+        "profile": null,
+        "user_id": "JDU384UIS",
+        "team": true
+    },
+    "Alice Johnson": {
+        "description": "Alice Johnson is a high school student passionate about journalism and technology. She enjoys interviewing club members and sharing their stories.",
+        "profile": null,
+        "user_id": "ALC567JKL",
+        "team": false
+    },
+    "Maria Chen": {
+        "description": "Maria Chen coordinates the editing team and ensures every article meets the highest standards. She loves creative writing and robotics.",
+        "profile": null,
+        "user_id": "MCH890QWE",
+        "team": true
+    },
+    "Samir Patel": {
+        "description": "Samir Patel covers Hack Club events and workshops. He is interested in photography and web development.",
+        "profile": null,
+        "user_id": "SAM234RTY",
+        "team": true
+    }
+}
