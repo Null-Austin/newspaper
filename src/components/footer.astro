@@ -47,8 +47,8 @@ const linkColumns = [
 ---
 
 <footer class="flex px-4 py-6 md:px-30 bg-accent-header">
-  <h3 class="text-accent-orange writing-lr text-right mr-3">The Hacker Press</h3>
-  <div class="w-full max-w-4xl">
+  <h3 class="text-accent-orange font-vt323 text-right text-2xl writing-lr mr-3">The Hacker Press</h3>
+  <div class="w-full max-w-4xl font-atkinson">
     <div class="max-w-none text-text-accent">
       <p class="text-base mb-10 sm:mb-4">
         The Hacker Press is an online newsletter built by teens at Hack Club.
@@ -59,7 +59,7 @@ const linkColumns = [
           linkColumns.map((column) => (
             <div>
               {column.title ? (
-               <h3 class="text-[#a7ef5f] uppercase text-xs font-bold font-instrument mb-2">{column.title}</h3>
+               <h3 class="text-[#a7ef5f] uppercase font-plex-sans text-xs font-bold mb-2">{column.title}</h3>
               ) : (
                 <Image src={HcFlag} alt="Hack Club flag logo" class="w-28 mb-4" />
               )}
