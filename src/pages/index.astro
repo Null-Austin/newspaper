@@ -2,7 +2,18 @@
 import Layout from "@layouts/layout.astro";
 import { getCollection } from "astro:content";
 import { formatDate } from "@util";
+import writersMetadataImport from "../data/writers.json" assert { type: "json" };
+
+interface Writer {
+  name: string;
+  description: string;
+  profile: string | null;
+  user_id: string;
+  team: boolean;
+}
+
 const posts = await getCollection("posts");
+const writersMetadata: Record<string, Writer> = writersMetadataImport;
 ---
 
 <Layout>
@@ -25,30 +36,58 @@ const posts = await getCollection("posts");
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-4 mx-4 md:mx-20">
     {
-      posts.map((post) => (
-        <div class="flex flex-col">
-          <img
-            src={post.data.properties.Image}
-            alt={post.data.properties.ImageAlt}
-            class="w-full h-64 object-cover mb-2 rounded-lg"
-          />
-          <h3><a
-            href={`/posts/${post.data.properties.Slug}`}
-            class="text-xl transition-colors text-text"
-            aria-label="Read '{post.data.properties.Name}' article"
-          >
-            {post.data.properties.Name}
-          </a></h3>
-          <div class="flex flex-col mt-2">
-            <p class="font-extralight font-phantom text-[#717171]">
-              {formatDate(post.data.properties.Date)}
-            </p>
-            <p class="font-bold font-phantom text-[#6A6A6A]">
-              Zach Latta, Orpheus, Heidi
-            </p>
+      posts.map((post) => {
+        console.log(post.data.properties);
+        return (
+          <div class="flex flex-col">
+        <img
+          src={post.data.properties.Image}
+          alt={post.data.properties.ImageAlt}
+          class="w-full h-64 object-cover mb-2 rounded-lg"
+        />
+        <h3><a
+          href={`/posts/${post.data.properties.Slug}`}
+          class="text-xl transition-colors text-text font-lora"
+          aria-label="Read '{post.data.properties.Name}' article"
+        >
+          {post.data.properties.Name}
+        </a></h3>
+        <div class="flex flex-col mt-2">
+          <p class="font-lexend font-light text-[#717171]">
+            {formatDate(post.data.properties.Date)}
+          </p>
+          <div class="flex flex-row items-center gap-1">
+            <div class="inline-flex ml-3">
+            {
+              post.data.properties.Authors.map((author, index) => {
+                return (
+                  <span class="relative -ml-3">
+                    <img
+                      src={writersMetadata[author].profile}
+                      alt={writersMetadata[author].name}
+                      class="w-8 h-8 rounded-full border-2 border-white"
+                    />
+                  </span>
+                );
+              })
+            }
+            </div>
+          <p class="font-lexend font-medium text-[#6A6A6A]">
+            {
+          post.data.properties.Authors.map((author, index) => {
+            const name = writersMetadata[author].name as string;
+            const isLast = index === post.data.properties.Authors.length - 1;
+            return (
+              <span>{name}{!isLast && ", "}</span>
+            );
+          })
+            }
+          </p>
           </div>
         </div>
-      ))
+          </div>
+        );
+      })
     }
   </div>
 </Layout>

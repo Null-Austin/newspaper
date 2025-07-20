@@ -24,7 +24,6 @@ const posts = defineCollection({
     properties: z.object({
       Name: transformedPropertySchema.title,
       Description: transformedPropertySchema.rich_text,
-      // TODO: is this correct? not sure
       Image: propertySchema.files.transform((files) => {
         const firstFile = files.files[0];
         if (!firstFile) return defaultImageUrl;
@@ -46,9 +45,7 @@ const posts = defineCollection({
           message: "Slug must be lowercase, alphanumeric, and kebab-case",
         }
       ),
-      // FIXME: does not load more than one person's data
-      // also, zod schema for this is kind of cooked
-      Authors: propertySchema.people,
+      Authors: transformedPropertySchema.rich_text.transform((text) => text.split(',')),
     }),
   }),
 });

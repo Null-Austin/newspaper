@@ -3,13 +3,21 @@ import Layout from "@layouts/layout.astro";
 import LoopsCta from "@components/loops-cta.astro";
 import { formatDate } from "@util";
 import type { CollectionEntry } from "astro:content";
-import writersMetadata from "../data/writers.json";
+import writersMetadataImport from "../data/writers.json" assert { type: "json" };
+
 interface Props {
   post: CollectionEntry<"posts">;
 }
+interface Writer {
+  name: string;
+  description: string;
+  profile: string | null;
+  user_id: string;
+  team: boolean;
+}
 
 const { post } = Astro.props;
-console.log(post.data.properties.Authors);
+const writersMetadata: Record<string, Writer> = writersMetadataImport;
 ---
 
 <Layout>
@@ -21,40 +29,48 @@ console.log(post.data.properties.Authors);
             class="w-full py-8 px-30 pt-20 bg-accent-header text-white pb-6 sm:pb-8 overflow-y-auto"
           >
             <h1
-              class="text-4xl sm:text-5xl/[130%] font-bold mb-6 w-full max-w-4xl"
+              class="text-4xl sm:text-5xl/[130%] font-lora mb-6 w-full max-w-4xl"
             >
               {post.data.properties.Name}
             </h1>
             <div class="flex flex-col xl:flex-row gap-10">
-                <img
+              <img
                 src={post.data.properties.Image}
                 alt={post.data.properties.ImageAlt}
                 class="w-[50vw] max-w-full h-[45vh] max-h-full"
               />
               <div>
-                <p class="text-lg sm:text-2xl mb-5">{post.data.properties.Description}</p>
-                <p class="text-gray-400">
-                    Written by {post.data.properties.Authors.people.map((author, index) => {
-                      const name = author.name;
-                      const isLast = index === post.data.properties.Authors.people.length - 1;
-                      return (
+                <p class="text-lg font-atkinson sm:text-2xl mb-5">{post.data.properties.Description}</p>
+                <p class="text-gray-400 font-lexend font-light">
+                    <span class="font-normal">Written</span> by 
+                      {post.data.properties.Authors.map((author, index) => {
+                      const isLast = index === post.data.properties.Authors.length - 1;
+                      if (!writersMetadata[author]) {
+                        return <span>Unknown Author{!isLast && ", "}</span>;
+                      }
+                      const name = writersMetadata[author].name as string;
+                        return (
                         <span>{name}{!isLast && ", "}</span>
                       );
                     })
                   }
                 </p>
-                <p class="text-gray-400 mb-5">
-                  {formatDate(post.data.properties.Date)}
+                <p class="text-gray-400 text-lexend mb-5">
+                    {post.data.properties.Date
+                    ? formatDate(post.data.properties.Date)
+                    : "No date? :c"}
                 </p>
-                <div class="inline-flex flex-row-reverse">
-                  {post.data.properties.Authors.people.map((author, index) => {
-                    console.log(author)
+                <div class="font-plex-sans">
+                  {post.data.properties.Authors.map((author, index) => {
+                    if (!writersMetadata[author]) {
+                      return <span>We faced an error :(</span>;
+                    }
                     return (
-                      <div class="flex items-start gap-3">
+                      <div class="flex items-start gap-3 mt-3">
                         <span class="flex rounded-full overflow-hidden justify-center w-8 shrink-0">
-                          <img src={author.avatar_url as string} alt={author.name as string} class="object-cover w-8" />
+                          <img src={writersMetadata[author].profile} alt={writersMetadata[author].name as string} class="object-cover w-8" />
                         </span>
-                        <p class="text-gray-400">{writersMetadata[author.id as keyof typeof writersMetadata]?.description}</p>
+                        <p class="text-gray-400">{writersMetadata[author].description}</p>
                       </div>
                     );
                   })}
@@ -63,24 +79,11 @@ console.log(post.data.properties.Authors);
             </div>
           </header>
           <main class="flex-1 p-6 sm:p-8 overflow-y-auto max-w-7/10 mx-auto">
-            <div class="xl:grid xl:grid-cols-[1fr_300px]">
-              <div class="prose prose-invert max-w-none lg:prose-lg text-text mb-16 grow"><slot /></div>
-              <aside class="bg-accent-header text-text-accent p-6 xl:ml-6 h-fit">
-                <h2 class="text-3xl xl:text-xl mb-4">We write an email newsletter too!</h2>
-                <p class="mb-8">Subscribe to The Hacker Press to be notified of cool projects, hackathons, and events at Hack Club. Unsubscribe anytime.</p>
-                <label for="signup-email">
-                  Your email
-                  <input
-                  type="email"
-                  placeholder="orpheus@hackclub.com"
-                  id="signup-email"
-                  class="basis-2/3 flex-[2] w-full p-2 mb-4 bg-[#404859]"
-                />
-                </label>
-                <button class="bg-orange-400 w-full sm:w-fit cursor-pointer text-crust px-4 py-2 rounded-full">
-                  Sign up
-                </button>
-              </aside>
+            <div class="xl:grid xl:grid-cols-[1fr_325px]">
+              <div class="prose prose-invert max-w-none lg:prose-lg text-text font-atkinson mb-16 grow">
+                <slot />
+              </div>
+              <LoopsCta />
             </div>
           </main>
         </article>

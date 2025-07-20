@@ -3,35 +3,26 @@ import { LOOPS_TOKEN } from "astro:env/server";
 import LoopsAudienceCount from "./loops-audience-count.astro";
 ---
 
-<div class={`w-full bg-crust text-crust-text rounded-lg shadow-xs`}>
-  <div class="py-12 px-8 flex flex-col text-center items-center justify-center">
-    <h2 class="text-4xl font-bold mb-3">Want to read more posts like this?</h2>
-    <p class="text-lg mb-6">
-      Subscribe to The Hacker National to be notified of cool projects,
-      hackathons, and events.<br />No spam. Unsubscribe anytime.
-    </p>
-    <div
-      class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full"
-    >
-      <input
-        type="email"
-        placeholder="Email"
-        class="w-full max-w-sm p-2 rounded-md border border-input"
-        disabled={!LOOPS_TOKEN}
-      />
-      <button
-        class="bg-accent w-full sm:w-fit cursor-pointer text-crust px-4 py-2 rounded-md"
-        disabled={!LOOPS_TOKEN}
-      >
-        Subscribe
-      </button>
-    </div>
-    <p class="text-sm text-muted mt-3">
-      Join <b
-        ><LoopsAudienceCount server:defer>
-          <span slot="fallback">0</span>
-        </LoopsAudienceCount></b
-      > other subscribers reading <i>The Hacker Press</i>
-    </p>
-  </div>
-</div>
+<aside class="bg-accent-header text-text-accent font-atkinson p-6 xl:ml-6 h-fit">
+  <h2 class="text-3xl xl:text-xl mb-4">
+    We write an email newsletter too!
+  </h2>
+  <p class="mb-8">
+    Subscribe to The Hacker Press to be notified of cool projects, hackathons, events, and more at Hack Club. It's a pretty cool newsletter!
+  </p>
+  <label for="signup-email">
+    Your Sacred Email:
+    <input
+      type="email"
+      placeholder="dinobox@hackclub.com"
+      id="signup-email"
+      class="basis-2/3 flex-[2] w-full p-2 mb-4 bg-[#404859]"
+    />
+  </label>
+  <button class="bg-orange-400 w-full sm:w-fit cursor-pointer text-crust px-4 py-2 rounded-full">
+    Sign up
+  </button>
+  <p class="text-xs font-atkinson mt-2">
+    By providing us with your email, you consent to being emailed roughly once/two weeks for this newsletter. You can unsubscribe anytime :D.
+  </p>
+</aside>
