@@ -1,19 +1,26 @@
 ---
 import { Image } from "astro:assets";
 import HcFlagTop from "@assets/hc-flag-top.svg";
+
+const { 
+  backgroundColour = "bg-mantle", 
+  textColour = "text-text", 
+  textHoverColour = "hover:text-black-accent", 
+  margin = "mx-30" 
+} = Astro.props;
 ---
 
-<div class="bg-mantle w-full px-4 sm:px-6 fixed top-0 z-50 shadow-xs backdrop-blur-md">
-  <nav class="max-w-7xl mx-auto flex justify-between items-center">
+<div class=`${backgroundColour}`>
+  <nav class=`${margin} flex justify-between items-center`>
     <!-- Logo -->
     <div class="flex items-center gap-4">
       <a href="/" class="flex items-center space-x-2">
         <HcFlagTop
-          class="w-28"
-          height={72}
-          aria-label="The Hacker Press logo"
+          class="w-28 h-auto"
+          aria-label="Hack Club flag logo"
         />
       </a>
+      <p class=`font-lora ${textColour} text-2xl`>The Hacker Press</p>
       {
         import.meta.env.DEV && (
           <span class="bg-orange-400 text-crust font-extrabold px-3 py-1 rounded-full text-lg font-mono">
@@ -24,28 +31,28 @@ import HcFlagTop from "@assets/hc-flag-top.svg";
     </div>
 
     <!-- Desktop Navigation -->
-    <div class="hidden md:flex items-center space-x-8 text-xl">
+    <div class="hidden md:flex font-lexend items-center space-x-8 text-md">
       <a
         href="/"
-        class="text-text hover:text-black-accent transition-colors duration-200"
+        class=`${textColour} ${textHoverColour} transition-colors duration-200`
       >
         Home
       </a>
       <a
         href="/archives"
-        class="text-text hover:text-black-accent transition-colors duration-200"
+        class=`${textColour} ${textHoverColour} transition-colors duration-200`
       >
         The Archives
       </a>
       <a
         href="/roundup"
-        class="text-text hover:text-black-accent transition-colors duration-200"
+        class=`${textColour} ${textHoverColour} transition-colors duration-200`
       >
         Weekly Roundup
       </a>
       <a
         href="/newsletter"
-        class="text-text hover:text-black-accent transition-colors duration-200"
+        class=`${textColour} ${textHoverColour} transition-colors duration-200`
       >
         Newsletter
       </a>
