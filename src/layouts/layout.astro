@@ -8,8 +8,7 @@ import Analytics from "@vercel/analytics/astro";
 import Header from "@components/header.astro";
 import Footer from "@components/footer.astro";
 
-const { headerParams } = Astro.props;
-console.log("Header Params:", headerParams);
+const { title, headerTheme } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,7 +17,7 @@ console.log("Header Params:", headerParams);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>The Hacker Press</title>
+    <title>{title ? `${title} - The Hacker Press` : "The Hacker Press"}</title>
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link
@@ -31,8 +30,9 @@ console.log("Header Params:", headerParams);
     <Analytics />
   </head>
   <body>
-    <Header {...headerParams} />
-    <main>
+    <a class="absolute bg-[#ffdab3] border-1 font-atkinson text-xl p-3 m-3 left-0 -translate-y-20 focus:translate-y-0" href="#main-content">Skip to Main Content</a>
+    <Header themeName={headerTheme} />
+    <main id="main-content">
       <slot />
     </main>
     <Footer />
