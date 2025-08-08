@@ -46,6 +46,7 @@ const posts = defineCollection({
         }
       ),
       Authors: transformedPropertySchema.rich_text.transform((text) => text.split(',')),
+      Tags: transformedPropertySchema.multi_select
     }),
   }),
 });

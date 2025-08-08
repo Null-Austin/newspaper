@@ -12,32 +12,90 @@ interface Writer {
   team: boolean;
 }
 
+let featuredFound = false;
 const posts = await getCollection("posts");
 const writersMetadata: Record<string, Writer> = writersMetadataImport;
 ---
 
 <Layout>
   <header class="bg-[url(/assets/vermont.png)] pt-20 pb-15 px-20">
-    <h2 class="text-xl font-fairplay italic">Hello there Hack Clubber! Welcome to...</h2>
-   
+    <p class="text-xl font-fairplay italic">Hello there Hack Clubber! Welcome to...</p>
     <h1 class="text-4xl mb-5">The Hacker Press</h1>
     <p class="">Hack Club's official newspaper/blog. Find articles here about the Slack, Hack Club's events, and more :D.</p>
   </header>
   <div class="flex flex-row gap-5 bg-accent-header text-white px-4 md:px-20 py-4">
-    <img
-        src="https://placehold.co/700x500.png"
-        alt="Featured Article"
-        class="w-64 object-cover rounded-lg"
-      />
-    <div class="">
-      <h3 class="text-4xl">#meta to complain about Zach Latta ‘breathing incorrectly’</h3>
-      <p>In other news, water is wet</p>
-    </div>
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-4 mx-4 md:mx-20">
+    <h2 class="sr-only">Featured Article</h2>
     {
       posts.map((post) => {
-        console.log(post.data.properties);
+        if (post.data.properties.Tags.includes("featured")) {
+          console.log("Found featured post:", post.data.properties.Name);
+          if (featuredFound) {
+            console.error("Holup, you can't have more than one featured post!");
+            return </>;
+          }
+          featuredFound = true;
+          return (<a href={`/posts/${post.data.properties.Slug}`}><div class="flex flex-col md:flex-row gap-5">
+            <img
+              src={post.data.properties.Image}
+              alt=""
+              class="rounded-lg w-64 h-48 object-cover"
+            />
+            <div class="text-white">
+              <div class="flex flex-row flex-wrap gap-2 mb-3">
+                {post.data.properties.Tags.map((tag) => {
+                  return (
+                    <span class="bg-[#FFBA85] font-lexend text-crust px-2 py-0.5 rounded-full">
+                      {tag}
+                    </span>
+                  );
+                })}
+              </div>
+              <h3 class="text-4xl font-lora">{post.data.properties.Name}</h3>
+              <p class="text-lg font-atkinson my-4">{post.data.properties.Description}</p>
+              <p class="text-[#A8A8A8] mb-2">{formatDate(post.data.properties.Date)}</p>
+              <div class="flex flex-row items-center gap-1">
+                <div class="inline-flex ml-3">
+                {
+                post.data.properties.Authors.map((author, index) => {
+                  return (
+                    <span class="relative -ml-3">
+                      <img
+                        src={writersMetadata[author].profile}
+                        alt=""
+                        class="w-8 h-8 rounded-full border-1 border-[#F6ECEC]"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  );
+                })
+                }
+                </div>
+                <p class="font-lexend font-medium text-[#A8A8A8]">
+                {
+                post.data.properties.Authors.map((author, index) => {
+                  const name = writersMetadata[author].name as string;
+                  const isLast = index === post.data.properties.Authors.length - 1;
+                  return (
+                    <span>{name}{!isLast && ", "}</span>
+                  );
+                })
+                }
+                </p>
+              </div>
+            </div>
+          </div></a>);
+        }
+      })
+    }
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-4 mx-4 md:mx-20">
+    <h2 class="sr-only">All Articles</h2>
+    {
+      posts.map((post) => {
+        if (post.data.properties.Tags.includes("featured")) {
+          console.log(`Skipping featured post: ${post.data.properties.Name}`);
+          return </>;
+        }
         return (
           <div class="flex flex-col">
         <img
@@ -48,7 +106,6 @@ const writersMetadata: Record<string, Writer> = writersMetadataImport;
         <h3><a
           href={`/posts/${post.data.properties.Slug}`}
           class="text-xl transition-colors text-text font-lora"
-          aria-label="Read '{post.data.properties.Name}' article"
         >
           {post.data.properties.Name}
         </a></h3>
@@ -64,8 +121,9 @@ const writersMetadata: Record<string, Writer> = writersMetadataImport;
                   <span class="relative -ml-3">
                     <img
                       src={writersMetadata[author].profile}
-                      alt={writersMetadata[author].name}
+                      alt=""
                       class="w-8 h-8 rounded-full border-2 border-white"
+                      aria-hidden="true"
                     />
                   </span>
                 );
