@@ -46,8 +46,9 @@ const linkColumns = [
 ];
 ---
 
-<footer class="flex px-4 py-6 md:px-30 bg-accent-header">
-  <p class="text-accent-orange font-vt323 text-right text-2xl writing-lr mr-3" aria-hidden="true">The Hacker Press</p>
+<footer class="flex flex-col md:flex-row px-4 py-6 md:px-30 bg-accent-header">
+  <p class="text-accent-orange font-vt323 md:text-right text-2xl writing-lr mr-3" aria-hidden="true">The Hacker Press</p>
+  <!-- warning - "writing-lr" is NOT a tailwind class and is located in global.css -->
   <div class="w-full max-w-4xl font-atkinson">
     <div class="max-w-none text-text-accent">
       <p class="text-base mb-10 sm:mb-4">
