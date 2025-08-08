@@ -18,16 +18,9 @@ interface Writer {
 
 const { post } = Astro.props;
 const writersMetadata: Record<string, Writer> = writersMetadataImport;
-
-const headerParams = {
-  backgroundColour: "bg-accent-header",
-  textColour: "text-[#F0F7EC]",
-  textHoverColour: "hover:text-neutral-200",
-  margin: "mx-30"
-};
 ---
 
-<Layout headerParams={headerParams}>
+<Layout title={post.data.properties.Name} headerTheme="dark">
   <div class="flex flex-col min-h-screen text-text">
     <div class="flex min-h-screen">
       <div class="flex flex-1">
