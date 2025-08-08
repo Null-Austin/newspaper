@@ -106,7 +106,7 @@
   --font-atkinson: "Atkinson Hyperlegible", system-ui, sans-serif;
   --font-plex-sans: "IBM Plex Sans", system-ui, sans-serif;
   --font-lexend: "Lexend", system-ui, sans-serif;
-  --font-lora: "Lora", system-ui, serif;
+  --font-lora: "Lora", "Times New Roman", serif;
   --font-fairplay: "Playfair Display", system-ui, sans-serif;
   --font-vt323: "VT323", system-ui, monospace;
   --font-phantom: "Phantom Sans", system-ui, sans-serif;
@@ -138,5 +138,11 @@ body {
 /* tailwind doesn't have this attribute lol */
 /* what better than to jank-ily make our own? */
 .writing-lr {
-  writing-mode: sideways-lr;
+  writing-mode: horizontal-tb;
+}
+
+@media (width >= 48rem) {
+  .writing-lr {
+    writing-mode: sideways-lr;
+  }
 }
