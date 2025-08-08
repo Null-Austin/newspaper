@@ -15,12 +15,12 @@
     "@astrojs/vercel": "^8.1.4",
     "@fontsource/atkinson-hyperlegible": "^5.2.5",
     "@fontsource/instrument-sans": "^5.2.5",
-    "@tailwindcss/vite": "^4.1.8",
+    "@tailwindcss/vite": "^4.1.11",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "astro": "^5.8.0",
     "countup.js": "^2.9.0",
-    "tailwindcss": "^4.1.8",
+    "tailwindcss": "^4.1.11",
     "vercel": "^42.3.0"
   },
   "devDependencies": {
