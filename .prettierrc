@@ -1,0 +1,14 @@
+{
+  "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  "semi": true,
+  "singleQuote": true,
+  "tailwindStylesheet": "./src/styles/global.css",
+  "overrides": [
+    {
+      "files": ["*.html", "*.astro", "*.ts"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}
