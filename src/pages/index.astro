@@ -23,7 +23,7 @@ const writersMetadata: Record<string, Writer> = writersMetadataImport;
     <h1 class="text-4xl mb-5">The Hacker Press</h1>
     <p class="">Hack Club's official newspaper/blog. Find articles here about the Slack, Hack Club's events, and more :D.</p>
   </header>
-  <div class="flex flex-row gap-5 bg-accent-header text-white px-4 md:px-20 py-4">
+  <div class="flex flex-row gap-5 bg-accent-header text-white px-4 md:px-20 py-8">
     <h2 class="sr-only">Featured Article</h2>
     {
       posts.map((post) => {
@@ -37,8 +37,8 @@ const writersMetadata: Record<string, Writer> = writersMetadataImport;
           return (<a href={`/posts/${post.data.properties.Slug}`}><div class="flex flex-col md:flex-row gap-5">
             <img
               src={post.data.properties.Image}
-              alt=""
-              class="rounded-lg w-64 h-48 object-cover"
+              alt={post.data.properties.ImageAlt}
+              class="rounded-md w-95 h-85 object-cover"
             />
             <div class="text-white">
               <div class="flex flex-row flex-wrap gap-2 mb-3">
@@ -98,17 +98,17 @@ const writersMetadata: Record<string, Writer> = writersMetadataImport;
         }
         return (
           <div class="flex flex-col">
-        <img
-          src={post.data.properties.Image}
-          alt={post.data.properties.ImageAlt}
-          class="w-full h-64 object-cover mb-2 rounded-lg"
-        />
-        <h3><a
+        <a
           href={`/posts/${post.data.properties.Slug}`}
           class="text-xl transition-colors text-text font-lora"
-        >
+        ><img
+          src={post.data.properties.Image}
+          alt={post.data.properties.ImageAlt}
+          class="w-full h-80 object-cover mb-2 rounded-lg"
+        />
+        <h3>
           {post.data.properties.Name}
-        </a></h3>
+        </h3></a>
         <div class="flex flex-col mt-2">
           <p class="font-lexend font-light text-[#717171]">
             {formatDate(post.data.properties.Date)}
