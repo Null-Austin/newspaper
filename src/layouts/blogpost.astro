@@ -18,75 +18,81 @@ interface Writer {
 
 const { post } = Astro.props;
 const writersMetadata: Record<string, Writer> = writersMetadataImport;
+
+const metaData = {
+  title: post.data.properties.Name,
+  description: post.data.properties.Description,
+  image: post.data.properties.Image,
+  imageAlt: post.data.properties.ImageAlt,
+  url: `https://news.hackclub.com/${post.data.properties.Slug}`,
+  authors: post.data.properties.Authors.map(author => writersMetadata[author]?.name as string).filter(Boolean),
+  type: "article",
+}
 ---
 
-<Layout title={post.data.properties.Name} headerTheme="dark">
+<Layout title={post.data.properties.Name} headerTheme="dark" metaData={metaData}>
   <div class="flex flex-col min-h-screen text-text">
     <div class="flex min-h-screen">
-      <div class="flex flex-1">
-        <article class="w-full mx-auto">
-          <header
-            class="w-full py-8 px-30 pt-10 bg-accent-header text-white pb-6 sm:pb-8 overflow-y-auto"
+      <div class="w-full mx-auto">
+        <header
+          class="w-full py-8 px-30 pt-10 bg-accent-header text-white pb-6 sm:pb-8 overflow-y-auto"
+        >
+          <h1
+            class="text-4xl sm:text-5xl/[130%] font-lora mb-6 w-full max-w-4xl"
           >
-            <h1
-              class="text-4xl sm:text-5xl/[130%] font-lora mb-6 w-full max-w-4xl"
-            >
-              {post.data.properties.Name}
-            </h1>
-            <div class="flex flex-col xl:flex-row gap-10">
-              <img
-                src={post.data.properties.Image}
-                alt={post.data.properties.ImageAlt}
-                class="w-[50vw] max-w-full h-[45vh] object-cover max-h-full"
-              />
-              <div>
-                <p class="text-lg font-atkinson sm:text-2xl mb-5">{post.data.properties.Description}</p>
-                <p class="text-gray-400 font-lexend font-light">
-                    <span class="font-normal">Written</span> by 
-                      {post.data.properties.Authors.map((author, index) => {
-                      const isLast = index === post.data.properties.Authors.length - 1;
-                      if (!writersMetadata[author]) {
-                        return <span>Unknown Author{!isLast && ", "}</span>;
-                      }
-                      const name = writersMetadata[author].name as string;
-                        return (
-                        <span>{name}{!isLast && ", "}</span>
-                      );
-                    })
-                  }
-                </p>
-                <p class="text-gray-400 text-lexend mb-5">
-                    {post.data.properties.Date
-                    ? formatDate(post.data.properties.Date)
-                    : "No date? :c"}
-                </p>
-                <div class="font-plex-sans">
-                  {post.data.properties.Authors.map((author, index) => {
+            {post.data.properties.Name}
+          </h1>
+          <div class="flex flex-col xl:flex-row gap-10">
+            <img
+              src={post.data.properties.Image}
+              alt={post.data.properties.ImageAlt}
+              class="w-[50vw] max-w-full h-[45vh] object-cover max-h-full"
+            />
+            <div>
+              <p class="text-lg font-atkinson sm:text-2xl mb-5">{post.data.properties.Description}</p>
+              <p class="text-gray-400 font-lexend font-light">
+                  <span class="font-normal">Written</span> by 
+                    {post.data.properties.Authors.map((author, index) => {
+                    const isLast = index === post.data.properties.Authors.length - 1;
                     if (!writersMetadata[author]) {
-                      return <span>We faced an error :(</span>;
+                      return <span>Unknown Author{!isLast && ", "}</span>;
                     }
-                    return (
-                      <div class="flex items-start gap-3 mt-3">
-                        <span class="flex rounded-full overflow-hidden justify-center w-8 shrink-0">
-                          <img src={writersMetadata[author].profile} alt={writersMetadata[author].name as string} class="object-cover w-8" />
-                        </span>
-                        <p class="text-gray-400">{writersMetadata[author].description}</p>
-                      </div>
+                    const name = writersMetadata[author].name as string;
+                      return (
+                      <span>{name}{!isLast && ", "}</span>
                     );
-                  })}
-                </div>
+                  })
+                }
+              </p>
+              <p class="text-gray-400 text-lexend mb-5">
+                  {post.data.properties.Date
+                  ? formatDate(post.data.properties.Date)
+                  : "No date? :c"}
+              </p>
+              <div class="font-plex-sans">
+                {post.data.properties.Authors.map((author, index) => {
+                  if (!writersMetadata[author]) {
+                    return <span>We faced an error :(</span>;
+                  }
+                  return (
+                    <div class="flex items-start gap-3 mt-3">
+                      <span class="flex rounded-full overflow-hidden justify-center w-8 shrink-0">
+                        <img src={writersMetadata[author].profile} alt={writersMetadata[author].name as string} class="object-cover w-8" />
+                      </span>
+                      <p class="text-gray-400">{writersMetadata[author].description}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          </header>
-          <main class="flex-1 p-6 sm:p-8 overflow-y-auto max-w-7/10 mx-auto">
-            <div class="xl:grid xl:grid-cols-[1fr_325px]">
-              <div class="prose prose-invert max-w-none lg:prose-lg text-text font-atkinson mb-16 grow">
-                <slot />
-              </div>
-              <LoopsCta />
-            </div>
-          </main>
-        </article>
+          </div>
+        </header>
+        <div class="p-6 sm:p-8 overflow-y-auto max-w-7/10 mx-auto xl:grid xl:grid-cols-[1fr_325px]">
+          <article class="prose prose-invert max-w-none lg:prose-lg text-text font-atkinson mb-16 grow">
+            <slot />
+          </article>
+          <LoopsCta />
+        </div>
       </div>
     </div>
   </div>

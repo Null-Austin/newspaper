@@ -8,16 +8,82 @@ import Analytics from "@vercel/analytics/astro";
 import Header from "@components/header.astro";
 import Footer from "@components/footer.astro";
 
-const { title, headerTheme } = Astro.props;
+const { 
+  headerTheme = "light", 
+  metaData = {}
+}: {
+  headerTheme?: "light" | "dark";
+  metaData?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | null;
+    imageAlt?: string | null;
+    url?: string | null;
+    type?: string | null;
+    datePublished?: Date | null;
+    authors?: string[] | null;
+  };
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
+    <title>{metaData.title ? `${metaData.title} - The Hacker Press` : "The Hacker Press"}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={metaData.url} />
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title ? `${title} - The Hacker Press` : "The Hacker Press"}</title>
+
+    <meta property="description" content={metaData.description} />
+
+    <!-- Welcome to the mess of OG tags lol -->
+    <meta property="og:title" content={metaData.title ? `${metaData.title} | The Hacker Press` : "The Hacker Press"} />
+    <meta property="og:description" content={metaData.description ? `${metaData.description}` : "Hack Club's official newspaper/blog. Find articles here about the Slack, Hack Club's events, and more :D."} />
+
+    <meta property="og:type" content={metaData.type ? `${metaData.type}` : "website"} />
+    <meta property="twitter:card" content="summary" />
+
+    {metaData.image && (
+      <>
+      <meta property="og:image" content={metaData.image} />
+      <meta property="og:image:alt" content={metaData.imageAlt} />
+      </>
+    )}
+
+    <meta property="og:url" content={metaData.url ? `${metaData.url}` : "https://news.hackclub.com/"} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Hack Club - The Hacker Press" />
+    <!-- End of the OG mess -->
+
+    {metaData.title && (
+      <!-- Oh you thought it was over? -->
+      <!-- Start of Rich Search Data -->
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": metaData.title,
+        "image": metaData.image,
+        "author": metaData.authors?.map(author => ({
+          "@type": "Person",
+          "name": author
+        })) ?? [],
+        "publisher": {
+          "@type": "Organization",
+          "name": "Hack Club - The Hacker Press",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://example.com/logo.png"
+          }
+        },
+        "datePublished": metaData.datePublished
+          ? metaData.datePublished.toISOString().split("T")[0]
+          : undefined
+      })} />
+      </script>
+      <!-- End of Rich Search Data -->
+    )}
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link
