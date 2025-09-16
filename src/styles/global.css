@@ -118,6 +118,8 @@
   --theme-ui-colors-purple: #a633d6;
   --theme-ui-colors-slate: #3c4858;
   --theme-ui-colors-cyan: #5bc0de;
+  --theme-ui-colors-primary: var(--theme-ui-colors-red);
+  --theme-ui-colors-sunken: #121217;
 }
 body {
   font-family: var(--font-sans);
@@ -186,4 +188,16 @@ a{
 }
 .bg-mantle{
   background-color: var(--color-accent-header);
+}
+
+/* Cool forms */
+.shadow, .fake-form{
+  box-shadow: 0px 5px var(--theme-ui-colors-sunken);
+}
+.fake-form{
+  background-color: var(--theme-ui-colors-elevated);
+}
+.fake-form button{
+  color: #ffffff;
+  background-color: var(--theme-ui-colors-primary);
 }
