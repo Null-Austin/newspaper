@@ -1,0 +1,8 @@
+header{
+    background-color: var(--theme-ui-colors-elevated);
+    border: 3;
+    margin: 0 auto;
+}
+header img{
+    background-color: rgba(0, 0, 0, 0.178);
+}

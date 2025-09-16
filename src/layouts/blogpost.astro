@@ -31,11 +31,12 @@ const metaData = {
 ---
 
 <Layout title={post.data.properties.Name} headerTheme="dark" metaData={metaData}>
+  <link rel="stylesheet" href="/src/styles/blog.css">
   <div class="flex flex-col min-h-screen text-text">
     <div class="flex min-h-screen">
       <div class="w-full mx-auto">
         <header
-          class="w-full py-8 px-30 pt-10 bg-accent-header text-white pb-6 sm:pb-8 overflow-y-auto"
+          class="w-full py-8 px-30 pt-10 text-white pb-6 sm:pb-8 overflow-y-auto"
         >
           <h1
             class="text-4xl sm:text-5xl/[130%] font-lora mb-6 w-full max-w-4xl"

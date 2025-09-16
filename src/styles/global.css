@@ -163,6 +163,8 @@ a{
   background-color: var(--theme-ui-colors-elevated);
   padding: 10px;
   border-radius: 5px;
+}
+.outline{
   border: 3px var(--theme-ui-colors-slate) solid;
 }
 
@@ -181,4 +183,7 @@ a{
 }
 .color-text-accent:hover{
   color: var(--color-text);
+}
+.bg-mantle{
+  background-color: var(--color-accent-header);
 }
