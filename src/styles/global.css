@@ -129,6 +129,10 @@ body {
   color: var(--color-text);
 }
 
+a{
+  color: var(--theme-ui-colors-cyan);
+}
+
 .prose a {
   color: var(--color-accent);
 }
