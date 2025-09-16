@@ -100,7 +100,6 @@
   --color-heading: #3f1717;
   --color-text: #ffffff;
   --color-input: #3f3939;
-  --colors-background: #17171d;
 
   --font-instrument: "Instrument Sans", system-ui, sans-serif;
   --font-heading: var(--font-instrument);
@@ -112,11 +111,15 @@
   --font-vt323: "VT323", system-ui, monospace;
   --font-phantom: "Phantom Sans", system-ui, sans-serif;
   
+  /* Hackclub themes */
+  --theme-ui-colors-elevated: #252429;
+  --colors-background: #17171d;
+  --theme-ui-colors-red: #ec3750
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-background);
+  background-color: var(--colors-background);
 }
 
 .prose {
@@ -151,7 +154,14 @@ body {
 
 /* A cool post background */
 .post-bg{
-  background-color: var(--colors-background);
+  background-color: var(--theme-ui-colors-elevated);
   padding: 10px;
   border-radius: 5px;
+}
+.header{
+  background-color: var(--theme-ui-colors-elevated);
+  color: #ffffff;
+}
+.header h1{
+  color: var(--theme-ui-colors-red);
 }
