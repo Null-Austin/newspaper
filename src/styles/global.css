@@ -114,9 +114,11 @@
   /* Hackclub themes */
   --theme-ui-colors-elevated: #252429;
   --colors-background: #17171d;
-  --theme-ui-colors-red: #ec3750
+  --theme-ui-colors-red: #ec3750;
+  --theme-ui-colors-purple: #a633d6;
+  --theme-ui-colors-slate: #3c4858;
+  --theme-ui-colors-cyan: #5bc0de;
 }
-
 body {
   font-family: var(--font-sans);
   background-color: var(--colors-background);
@@ -157,9 +159,10 @@ body {
   background-color: var(--theme-ui-colors-elevated);
   padding: 10px;
   border-radius: 5px;
+  border: 3px var(--theme-ui-colors-slate) solid;
 }
+
 .header{
-  background-color: var(--theme-ui-colors-elevated);
   color: #ffffff;
 }
 .header h1{

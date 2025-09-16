@@ -106,7 +106,7 @@ const writersMetadata: Record<string, Writer> = writersMetadataImport;
           alt={post.data.properties.ImageAlt}
           class="w-full h-80 object-cover mb-2 rounded-lg"
         />
-        <h3>
+        <h3 class="title">
           {post.data.properties.Name}
         </h3></a>
         <div class="flex flex-col mt-2">
@@ -136,7 +136,7 @@ const writersMetadata: Record<string, Writer> = writersMetadataImport;
             const name = writersMetadata[author]?.name || "Unknown Author" as string;
             const isLast = index === post.data.properties.Authors.length - 1;
             return (
-              <span>{name}{!isLast && ", "}</span>
+              <span class="username ">{name}{!isLast && ", "}</span>
             );
           })
             }
