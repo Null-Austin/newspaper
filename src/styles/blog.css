@@ -6,3 +6,7 @@ header{
 header img{
     background-color: rgba(0, 0, 0, 0.178);
 }
+h1.title{
+    color: var(--theme-ui-colors-primary);
+    font-weight: 700;
+}
