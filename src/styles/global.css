@@ -96,10 +96,11 @@
   --color-black-accent: #354152;
   --color-text-accent: #dbe1f0;
   --color-muted: #ffc9c9;
-  --color-background: #fff5ea;
+  --color-background: #252429;
   --color-heading: #3f1717;
-  --color-text: #3f1717;
+  --color-text: #ffffff;
   --color-input: #3f3939;
+  --colors-background: #17171d;
 
   --font-instrument: "Instrument Sans", system-ui, sans-serif;
   --font-heading: var(--font-instrument);
@@ -110,6 +111,7 @@
   --font-fairplay: "Playfair Display", system-ui, sans-serif;
   --font-vt323: "VT323", system-ui, monospace;
   --font-phantom: "Phantom Sans", system-ui, sans-serif;
+  
 }
 
 body {
@@ -145,4 +147,11 @@ body {
   .writing-lr {
     writing-mode: sideways-lr;
   }
+}
+
+/* A cool post background */
+.post-bg{
+  background-color: var(--colors-background);
+  padding: 10px;
+  border-radius: 5px;
 }
