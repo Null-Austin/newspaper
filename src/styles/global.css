@@ -164,4 +164,6 @@ body {
 }
 .header h1{
   color: var(--theme-ui-colors-red);
+  font-weight: 700;
+  font-size: 64px;
 }
