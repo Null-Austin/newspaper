@@ -120,7 +120,7 @@ const writersMetadata: Record<string, Writer> = writersMetadataImport;
                 return (
                   <span class="relative -ml-3">
                     <img
-                      src={writersMetadata[author].profile}
+                      src={writersMetadata[author]?.profile || "https://i.pravatar.cc/300?u=SamirPatel"}
                       alt=""
                       class="w-8 h-8 rounded-full border-2 border-white"
                       aria-hidden="true"
@@ -133,7 +133,7 @@ const writersMetadata: Record<string, Writer> = writersMetadataImport;
           <p class="font-lexend font-medium text-[#6A6A6A]">
             {
           post.data.properties.Authors.map((author, index) => {
-            const name = writersMetadata[author].name as string;
+            const name = writersMetadata[author]?.name || author as string;
             const isLast = index === post.data.properties.Authors.length - 1;
             return (
               <span>{name}{!isLast && ", "}</span>
