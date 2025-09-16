@@ -133,7 +133,7 @@ const writersMetadata: Record<string, Writer> = writersMetadataImport;
           <p class="font-lexend font-medium text-[#6A6A6A]">
             {
           post.data.properties.Authors.map((author, index) => {
-            const name = writersMetadata[author]?.name || author as string;
+            const name = writersMetadata[author]?.name || "Unknown Author" as string;
             const isLast = index === post.data.properties.Authors.length - 1;
             return (
               <span>{name}{!isLast && ", "}</span>
