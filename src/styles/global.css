@@ -167,3 +167,24 @@ body {
   font-weight: 700;
   font-size: 64px;
 }
+:root{
+  --color-crust: #0f0000;
+  --color-crust-text: #ffffff;
+  --color-accent: #a7ef5f;
+  --color-accent-header: #060e1f;
+  --color-accent-orange: #faaa40;
+  --color-black-accent: #354152;
+  --color-text-accent: #dbe1f0;
+  --color-muted: #ffc9c9;
+  --color-background: #252429;
+  --color-heading: #3f1717;
+  --color-text: #ffffff;
+  --color-input: #3f3939;
+}
+/* header */
+.color-muted{
+  color: var(--color-muted);
+}
+.color-text-accent:hover{
+  color: var(--color-text);
+}
